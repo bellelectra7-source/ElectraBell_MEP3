@@ -803,3 +803,16 @@ kbd {
     object-fit: contain;
     background: #171526;
 }
+/* TEMPORARY TEST: Make portfolio screenshots fully visible */
+.project-image {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 150px;
+    object-fit: contain !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    background-color: #ffffff !important;
+}
