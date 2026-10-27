@@ -1,49 +1,77 @@
-/* ==================================================
-   ELECTRA BELL PORTFOLIO
-   Dark purple theme with the chosen Unsplash image.
-   ================================================== */
+/* ========================================
+   ELECTRA BELL — GAME DESIGN PORTFOLIO
+   Theme: Dark Purple, Plum and Lilac
+   ======================================== */
 
-/* Use consistent sizing for all elements. */
-* {
-    box-sizing: border-box;
-}
+
+/* 1. COLOUR PALETTE */
 
 :root {
-    --background: #0a0812;
-    --panel: #151020;
-    --panel-light: #20172e;
-    --purple: #a78bfa;
-    --purple-bright: #c4b5fd;
-    --text: #f7f4ff;
-    --muted: #c0b8cf;
-    --border: rgba(196, 181, 253, 0.2);
+    --background: #0b0612;
+    --panel: #170d22;
+    --panel-light: #241331;
+
+    --purple: #a855f7;
+    --purple-bright: #d8b4fe;
+    --purple-soft: #c084fc;
+    --purple-dark: #3b1857;
+
+    --text: #faf5ff;
+    --muted: #d0c1dc;
+
+    --border: rgba(192, 132, 252, 0.25);
 }
 
-/* Base text and background. */
+
+/* 2. GENERAL PAGE SETTINGS */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 90px;
 }
 
 body {
-    margin: 0;
-    color: var(--text);
+    min-height: 100vh;
     background-color: var(--background);
+    color: var(--text);
+
     font-family: "Inter", sans-serif;
     line-height: 1.7;
+
     overflow-wrap: break-word;
 
-    /* The dark overlay makes text readable over the image. */
+    /* Background image with a strong purple overlay.
+       Save the image as assets/background.jpg. */
     background-image:
         linear-gradient(
-            rgba(10, 8, 18, 0.84),
-            rgba(10, 8, 18, 0.94)
+            rgba(25, 5, 43, 0.88),
+            rgba(11, 6, 18, 0.96)
         ),
         url("assets/background.jpg");
+
     background-position: center top;
     background-size: cover;
-    background-attachment: fixed;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+/* 3. BASIC ELEMENTS */
+
+a {
+    color: var(--purple-bright);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #ead5ff;
 }
 
 img {
@@ -51,493 +79,638 @@ img {
     max-width: 100%;
 }
 
-a {
-    color: var(--purple-bright);
-    text-underline-offset: 4px;
+button {
+    font: inherit;
 }
 
-a:hover {
-    color: #ffffff;
-}
-
-a:focus-visible,
-button:focus-visible {
-    outline: 3px solid var(--purple-bright);
-    outline-offset: 4px;
-}
-
-.container {
-    width: min(1100px, 90%);
-    margin-inline: auto;
-}
-
-.section {
-    padding-top: 90px;
-    padding-bottom: 90px;
-}
-
-.section-panel {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: rgba(15, 11, 24, 0.82);
+p {
+    color: var(--muted);
+    margin-bottom: 16px;
 }
 
 h1,
 h2,
 h3,
-p {
-    margin-top: 0;
-}
-
-h1,
-h2,
-h3 {
-    line-height: 1.2;
-    letter-spacing: -0.035em;
+h4 {
+    color: var(--text);
+    line-height: 1.25;
 }
 
 h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin-bottom: 20px;
-    font-size: clamp(2rem, 4vw, 3rem);
 }
 
 h3 {
-    font-size: 1.2rem;
+    margin-bottom: 12px;
 }
 
-p {
-    color: var(--muted);
+::selection {
+    background: var(--purple);
+    color: #ffffff;
 }
 
-.eyebrow {
-    margin-bottom: 14px;
-    color: var(--purple-bright);
-    font-size: 0.76rem;
-    font-weight: 800;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+
+/* 4. PAGE WIDTH */
+
+header,
+main,
+footer {
+    width: 100%;
 }
 
-/* HEADER AND NAVIGATION */
-.site-header {
+section {
+    padding: 80px 8%;
+    scroll-margin-top: 70px;
+}
+
+section > h2 {
+    position: relative;
+    display: inline-block;
+}
+
+section > h2::after {
+    content: "";
+    display: block;
+
+    width: 65px;
+    height: 4px;
+
+    margin-top: 12px;
+
+    background: var(--purple);
+    border-radius: 10px;
+}
+
+
+/* 5. NAVIGATION BAR */
+
+nav {
     position: sticky;
     top: 0;
-    z-index: 10;
-    border-bottom: 1px solid var(--border);
-    background: rgba(10, 8, 18, 0.94);
-    backdrop-filter: blur(12px);
-}
+    z-index: 1000;
 
-.nav {
-    min-height: 74px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
+    gap: 20px;
+
+    padding: 18px 8%;
+
+    background: rgba(13, 7, 20, 0.94);
+    border-bottom: 1px solid var(--border);
+
+    backdrop-filter: blur(14px);
 }
 
-.logo {
-    color: var(--text);
-    font-size: 1.7rem;
-    font-weight: 800;
-    text-decoration: none;
-}
-
-.logo span {
-    color: var(--purple);
-}
-
-.nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 22px;
-}
-
-.nav-links a {
+nav a {
     color: var(--muted);
-    font-size: 0.9rem;
-    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
 
-.nav-links a:hover {
+nav a:hover {
     color: var(--purple-bright);
 }
 
-.nav-links .nav-contact {
-    padding: 8px 14px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
+nav a:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--purple-bright);
+    outline-offset: 4px;
 }
 
-/* HERO / INTRODUCTION */
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 22px;
+
+    list-style: none;
+}
+
+nav ul a {
+    display: inline-block;
+}
+
+
+/* 6. HERO / INTRODUCTION SECTION */
+
 .hero {
-    min-height: 620px;
+    min-height: 78vh;
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+
     padding-top: 100px;
     padding-bottom: 100px;
 }
 
 .hero h1 {
-    max-width: 850px;
-    margin-bottom: 24px;
-    font-size: clamp(2.8rem, 7vw, 5.4rem);
+    max-width: 900px;
+
+    margin-bottom: 20px;
+
+    font-size: clamp(2.7rem, 7vw, 5.5rem);
     font-weight: 800;
-    letter-spacing: -0.07em;
+    letter-spacing: -2px;
+    line-height: 1.08;
 }
 
-.accent-text {
+.hero h1 span {
     color: var(--purple-bright);
 }
 
-.hero-description {
-    max-width: 640px;
-    margin-bottom: 28px;
-    font-size: 1.08rem;
+.hero p {
+    max-width: 680px;
+    font-size: 1.1rem;
 }
 
-.hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+.hero .subtitle {
+    color: var(--purple-soft);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
 }
 
-.hero-note {
-    margin-top: 26px;
-    font-size: 0.9rem;
-}
 
-/* BUTTONS */
+/* 7. BUTTONS */
+
+.btn,
+button,
 .button {
     display: inline-flex;
-    min-height: 46px;
     align-items: center;
     justify-content: center;
-    padding: 11px 18px;
-    border: 1px solid transparent;
-    border-radius: 9px;
-    font: inherit;
+    gap: 8px;
+
+    padding: 12px 24px;
+
+    background: var(--purple);
+    color: #ffffff;
+
+    border: 1px solid var(--purple);
+    border-radius: 10px;
+
     font-weight: 700;
-    text-align: center;
-    text-decoration: none;
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
+.btn:hover,
+button:hover,
 .button:hover {
+    background: #9333ea;
+    border-color: #c084fc;
+    color: #ffffff;
+
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25);
 }
 
-.button-primary {
-    color: #130b20;
-    background: var(--purple-bright);
+.btn:active,
+button:active,
+.button:active {
+    transform: translateY(0);
 }
 
-.button-primary:hover {
-    color: #130b20;
-    background: #ddd2ff;
+
+/* 8. ABOUT SECTION */
+
+#about {
+    background: rgba(17, 9, 27, 0.78);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
-.button-secondary {
-    color: var(--text);
-    border-color: var(--border);
-    background: rgba(21, 16, 32, 0.75);
+#about p {
+    max-width: 850px;
 }
 
-/* SKILLS AND ABOUT */
-.about-panel,
-.credits-panel {
-    max-width: 820px;
-    padding: 26px;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    background: rgba(21, 16, 32, 0.86);
-}
-
-.about-panel p:last-child,
-.credits-panel p:last-child {
-    margin-bottom: 0;
-}
-
+.skills,
 .skill-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 22px;
+    gap: 12px;
+
+    margin-top: 24px;
 }
 
+.skills span,
 .skill-list span {
-    padding: 8px 13px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
+    display: inline-block;
+
+    padding: 8px 15px;
+
+    background: rgba(168, 85, 247, 0.12);
     color: var(--purple-bright);
-    background: rgba(21, 16, 32, 0.8);
-    font-size: 0.86rem;
+
+    border: 1px solid var(--border);
+    border-radius: 30px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
-/* PROJECT CARDS */
-.section-intro {
-    max-width: 650px;
-    margin-bottom: 30px;
+
+/* 9. PROJECTS SECTION */
+
+#projects {
+    background: rgba(11, 6, 18, 0.55);
 }
 
-.project-grid {
+.project-grid,
+.projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+
+    margin-top: 30px;
 }
 
 .project-card {
     min-width: 0;
     overflow: hidden;
+
+    background: rgba(23, 13, 34, 0.94);
+
     border: 1px solid var(--border);
-    border-radius: 14px;
-    background: rgba(21, 16, 32, 0.96);
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    border-radius: 16px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .project-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
+
     border-color: var(--purple);
+    box-shadow: 0 15px 35px rgba(88, 28, 135, 0.2);
 }
 
 .project-card img {
     width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: contain;
-    background: #0c0913;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+
+    background: var(--panel-light);
+    border-bottom: 1px solid var(--border);
 }
 
-.project-info {
-    padding: 20px;
+.project-card h3 {
+    padding: 20px 20px 0;
+    font-size: 1.2rem;
 }
 
-.project-type {
-    margin-bottom: 10px;
+.project-card p {
+    padding: 0 20px;
+    font-size: 0.95rem;
+}
+
+.project-card a {
+    display: inline-block;
+    margin: 0 20px 20px;
+
     color: var(--purple-bright);
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
+    font-weight: 700;
 }
 
-.project-info h3 {
-    margin-bottom: 10px;
-    color: var(--text);
+.project-card a:hover {
+    color: #ead5ff;
 }
 
-.project-info p:last-child {
-    margin-bottom: 0;
+
+/* 10. MINI-GAME SECTION */
+
+#mini-game {
+    background: rgba(24, 10, 38, 0.78);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
-/* STAR COLLECTOR MINI-GAME */
-.game-panel {
-    max-width: 850px;
-    padding: 20px;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    background: rgba(21, 16, 32, 0.94);
+#mini-game > p {
+    max-width: 750px;
 }
 
-.game-stats {
+
+/* Game information: score and timer */
+
+.game-info {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 16px;
-    padding-bottom: 16px;
+
+    margin: 24px 0;
 }
 
-.game-stats strong {
+.game-info p,
+.game-info span {
     color: var(--purple-bright);
+    font-weight: 700;
 }
 
-.game-arena {
+
+/* Game arena */
+
+#arena {
     position: relative;
-    min-height: 350px;
+
+    width: 100%;
+    max-width: 800px;
+    height: 420px;
+
     overflow: hidden;
-    border: 1px solid rgba(196, 181, 253, 0.28);
-    border-radius: 12px;
+
     background:
-        radial-gradient(circle at 50% 50%, #24173a 0%, #100c1b 75%);
-    touch-action: manipulation;
+        radial-gradient(
+            circle at center,
+            rgba(88, 28, 135, 0.25),
+            transparent 70%
+        ),
+        #10091a;
+
+    border: 2px solid var(--purple-dark);
+    border-radius: 16px;
+
+    box-shadow:
+        inset 0 0 35px rgba(168, 85, 247, 0.08),
+        0 12px 35px rgba(0, 0, 0, 0.2);
 }
 
-.player,
-.star,
-.hazard {
+
+/* Player inside the game */
+
+#player {
     position: absolute;
-    z-index: 2;
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    user-select: none;
+
+    width: 34px;
+    height: 34px;
+
+    left: 10%;
+    top: 50%;
+
+    background: var(--purple-bright);
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+
+    box-shadow: 0 0 20px rgba(192, 132, 252, 0.8);
+
+    transform: translate(-50%, -50%);
 }
 
-.player {
-    left: 12px;
-    top: 12px;
-    color: #e9ddff;
-    font-size: 1.5rem;
-    text-shadow: 0 0 16px #bba0ff;
-}
 
-.star {
+/* Collectible star */
+
+#star {
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
     left: 70%;
-    top: 45%;
-    color: #ffe59a;
-    font-size: 1.8rem;
-    text-shadow: 0 0 14px #ffc857;
+    top: 35%;
+
+    background: #e9c5ff;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+
+    box-shadow: 0 0 20px rgba(216, 180, 254, 0.9);
+
+    transform: rotate(45deg);
 }
 
-.hazard {
-    left: 50%;
-    top: 75%;
-    color: #ff758f;
-    font-size: 1.7rem;
-    text-shadow: 0 0 12px #ff315b;
-}
 
-.game-message {
+/* Moving hazard */
+
+#hazard {
     position: absolute;
-    z-index: 3;
+
+    width: 38px;
+    height: 38px;
+
+    left: 50%;
+    top: 60%;
+
+    background: #701a75;
+    border: 2px solid #e879f9;
+    border-radius: 10px;
+
+    box-shadow: 0 0 18px rgba(217, 70, 239, 0.45);
+}
+
+
+/* Game message overlay */
+
+#gameMessage {
+    position: absolute;
     inset: 0;
+    z-index: 5;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background: rgba(10, 8, 18, 0.9);
+
+    padding: 24px;
+    text-align: center;
+
+    background: rgba(11, 6, 18, 0.94);
+    border-radius: 14px;
+}
+
+#gameMessage h3,
+#messageTitle {
+    margin-bottom: 12px;
+
+    color: var(--purple-bright);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+#gameMessage p,
+#messageText {
+    max-width: 450px;
+    margin-bottom: 20px;
+}
+
+#startGame {
+    margin-top: 8px;
+}
+
+
+/* 11. CREDITS SECTION */
+
+#credits {
+    background: rgba(11, 6, 18, 0.78);
+}
+
+#credits p,
+#credits li {
+    color: var(--muted);
+}
+
+#credits ul {
+    padding-left: 22px;
+    margin-top: 15px;
+}
+
+#credits li {
+    margin-bottom: 10px;
+}
+
+#credits a {
+    color: var(--purple-bright);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+
+/* 12. CONTACT SECTION */
+
+#contact {
+    background: rgba(24, 10, 38, 0.78);
+    border-top: 1px solid var(--border);
+}
+
+#contact a {
+    color: var(--purple-bright);
+    font-weight: 700;
+}
+
+#contact a:hover {
+    color: #ead5ff;
+}
+
+
+/* 13. FOOTER */
+
+footer {
+    padding: 28px 8%;
+
+    background: rgba(8, 4, 13, 0.96);
+    border-top: 1px solid var(--border);
+
     text-align: center;
 }
 
-.game-message h3 {
-    font-size: 1.7rem;
-}
-
-.game-message p {
-    max-width: 420px;
-}
-
-.game-message.is-hidden {
-    display: none;
-}
-
-.game-help {
-    margin: 16px 0 0;
-    font-size: 0.88rem;
-}
-
-kbd {
-    padding: 3px 6px;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    color: var(--text);
-    background: var(--panel-light);
-    font-family: inherit;
-}
-
-/* CONTACT */
-.contact-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.contact-content .button {
-    margin-top: 10px;
-}
-
-/* CREDITS */
-.credits-panel p {
-    margin-bottom: 18px;
-}
-
-.credits-panel a {
-    overflow-wrap: anywhere;
-}
-
-/* FOOTER */
-.site-footer {
-    padding: 25px 0;
-    border-top: 1px solid var(--border);
-    background: rgba(10, 8, 18, 0.95);
-}
-
-.site-footer .container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.site-footer p {
+footer p {
     margin: 0;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
 }
 
-/* MOBILE AND TABLET */
-@media (max-width: 800px) {
-    .project-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+/* 14. TABLETS AND SMALLER SCREENS */
+
+@media (max-width: 900px) {
+    section {
+        padding: 65px 6%;
     }
 
-    .nav {
+    nav {
+        padding: 16px 6%;
         align-items: flex-start;
-        flex-direction: column;
-        justify-content: center;
-        padding-top: 12px;
-        padding-bottom: 12px;
     }
 
-    .nav-links {
-        gap: 12px 18px;
+    nav ul {
+        gap: 12px 16px;
+    }
+
+    .project-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #arena {
+        height: 380px;
+    }
+}
+
+
+/* 15. MOBILE PHONES */
+
+@media (max-width: 600px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    nav ul {
+        justify-content: flex-start;
+        gap: 10px 16px;
+    }
+
+    nav a {
+        font-size: 0.88rem;
+    }
+
+    section {
+        padding: 50px 6%;
     }
 
     .hero {
-        min-height: auto;
-        padding-top: 90px;
-        padding-bottom: 90px;
-    }
-}
-
-@media (max-width: 540px) {
-    .section {
+        min-height: 65vh;
         padding-top: 65px;
         padding-bottom: 65px;
     }
 
-    .project-grid {
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .project-grid,
+    .projects-grid {
         grid-template-columns: 1fr;
     }
 
-    .game-arena {
-        min-height: 300px;
+    #arena {
+        height: 320px;
     }
 
-    .game-panel {
-        padding: 12px;
+    .game-info {
+        gap: 8px 16px;
     }
 
-    .game-stats {
-        font-size: 0.9rem;
-    }
-
-    .site-footer .container {
-        flex-direction: column;
-        align-items: flex-start;
+    .btn,
+    button,
+    .button {
+        max-width: 100%;
     }
 }
 
-/* Respect users who prefer reduced motion. */
+
+/* 16. ACCESSIBILITY: REDUCED ANIMATION */
+
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
     *,
     *::before,
     *::after {
-        scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
     }
 }
