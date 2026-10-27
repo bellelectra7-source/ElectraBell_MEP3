@@ -3,265 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Electra Bell's game design and development portfolio.">
 
     <title>Electra Bell | Game Design Portfolio</title>
+    <meta name="description" content="Electra Bell's game design portfolio, featuring game projects, coursework and a browser mini-game.">
 
-    <!-- Inter is our chosen font. -->
+    <!-- Google Font: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- My own CSS file controls the appearance of the site. -->
+    <!-- Connect the CSS file -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- JavaScript loads after the HTML has been read. -->
+    <!-- Load JavaScript after the HTML has been read -->
     <script src="script.js" defer></script>
 </head>
 
 <body>
-    <header class="site-header">
-        <nav class="nav container" aria-label="Main navigation">
-            <a class="logo" href="#home">EB<span>.</span></a>
 
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#game">Mini-game</a>
-                <a href="#credits">Credits</a>
-                <a class="nav-contact" href="#contact">Contact</a>
-            </div>
-        </nav>
-    </header>
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#home"><strong>Electra Bell</strong></a>
 
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#mini-game">Mini-game</a></li>
+            <li><a href="#credits">Credits</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- HERO SECTION -->
     <main>
-        <!-- INTRODUCTION -->
-        <section class="hero container" id="home">
-            <p class="eyebrow">GAME DESIGN · CREATIVE DEVELOPMENT</p>
+        <section class="hero" id="home">
+            <p class="subtitle">Game Design Student &amp; Aspiring Developer</p>
 
-            <h1>Hi, I'm Electra.<br>
-                I build <span class="accent-text">playable worlds.</span>
+            <h1>
+                Hello, I'm <span>Electra Bell.</span>
             </h1>
 
-            <p class="hero-description">
-                I'm a Game Design student learning to turn ideas into
-                interactive experiences through game mechanics, scripting
-                and environment design.
+            <p>
+                Welcome to my portfolio. This website showcases my game design
+                projects, coursework, creative ideas and coding progress.
             </p>
 
-            <div class="hero-actions">
-                <a class="button button-primary" href="#projects">Explore my projects</a>
-                <a class="button button-secondary" href="#contact">Get in touch</a>
-            </div>
-
-            <p class="hero-note">Learning. Creating. Improving.</p>
+            <a class="btn" href="#projects">Explore My Projects</a>
         </section>
 
-        <!-- ABOUT -->
-        <section class="section container" id="about">
-            <p class="eyebrow">GET TO KNOW ME</p>
-            <h2>Curious mind. Creative goals.</h2>
 
-            <div class="about-panel">
-                <p>
-                    I'm developing my skills in game design and production.
-                    My coursework gives me opportunities to experiment with
-                    gameplay, level design, user interfaces and interactive systems.
-                </p>
-                <p>
-                    This portfolio documents my learning journey and showcases
-                    selected work and experiments.
-                </p>
-            </div>
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <h2>About Me</h2>
 
-            <div class="skill-list" aria-label="Skills I am developing">
+            <p>
+                I am a Game Design and Production student developing my skills
+                in game development, programming, level design and interactive
+                experiences.
+            </p>
+
+            <p>
+                This portfolio documents my learning journey and showcases
+                projects I have worked on throughout my studies.
+            </p>
+
+            <h3>Skills I'm Developing</h3>
+
+            <div class="skills">
                 <span>Game Design</span>
                 <span>Unity</span>
                 <span>C#</span>
-                <span>Level Design</span>
-                <span>HTML & CSS</span>
+                <span>HTML</span>
+                <span>CSS</span>
                 <span>JavaScript</span>
+                <span>Level Design</span>
+                <span>Problem Solving</span>
             </div>
         </section>
 
-        <!-- COURSEWORK PROJECTS -->
-        <section class="section section-panel" id="projects">
-            <div class="container">
-                <p class="eyebrow">SELECTED WORK</p>
-                <h2>Projects & experiments.</h2>
-                <p class="section-intro">
-                    A selection of my coursework and game development practice.
-                </p>
 
-                <div class="project-grid">
-                    <article class="project-card">
-                        <img src="assets/CPA 3 game win condition.png"
-                             alt="Screenshot of the CPA 3 game win condition" loading="lazy">
-                        <div class="project-info">
-                            <p class="project-type">CPA 3 · GAMEPLAY</p>
-                            <h3>Win Condition</h3>
-                            <p>A coursework example showing the game's winning outcome.</p>
-                        </div>
-                    </article>
+        <!-- PROJECTS SECTION -->
+        <section id="projects">
+            <h2>My Projects</h2>
 
-                    <article class="project-card">
-                        <img src="assets/MEP 1 LEVEL 1 gameplay.png"
-                             alt="Screenshot of MEP 1 Level 1 gameplay" loading="lazy">
-                        <div class="project-info">
-                            <p class="project-type">MEP 1 · LEVEL DESIGN</p>
-                            <h3>Level One</h3>
-                            <p>A look at the environment and gameplay in my first level.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <img src="assets/MEP 1 LEVEL 2 gameplay.png"
-                             alt="Screenshot of MEP 1 Level 2 gameplay" loading="lazy">
-                        <div class="project-info">
-                            <p class="project-type">MEP 1 · LEVEL DESIGN</p>
-                            <h3>Level Two</h3>
-                            <p>A second level from the same coursework project.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <img src="assets/MEP 2 game over screen.png"
-                             alt="Screenshot of the MEP 2 game over screen" loading="lazy">
-                        <div class="project-info">
-                            <p class="project-type">MEP 2 · GAMEPLAY</p>
-                            <h3>Game Over</h3>
-                            <p>A screen communicating the end of a gameplay session.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <img src="assets/MEP 2 website game.png"
-                             alt="Screenshot of my MEP 2 website game" loading="lazy">
-                        <div class="project-info">
-                            <p class="project-type">MEP 2 · WEB GAME</p>
-                            <h3>Website Game</h3>
-                            <p>A browser-based game project exploring interactive web design.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <img src="assets/MEP 3 start menu.png"
-                             alt="Screenshot of the MEP 3 start menu" loading="lazy">
-                        <div class="project-info">
-                            <p class="project-type">MEP 3 · USER INTERFACE</p>
-                            <h3>Start Menu</h3>
-                            <p>The start menu designed for my MEP 3 game.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <img src="assets/MEP 3 kitchen scene.png"
-                             alt="Screenshot of the MEP 3 3D kitchen scene" loading="lazy">
-                        <div class="project-info">
-                            <p class="project-type">MEP 3 · 3D ENVIRONMENT</p>
-                            <h3>Kitchen Scene</h3>
-                            <p>A 3D kitchen environment from my game project.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- PLAYABLE MINI-GAME -->
-        <section class="section container" id="game">
-            <p class="eyebrow">A LITTLE INTERACTIVE EXPERIMENT</p>
-            <h2>Star Collector.</h2>
-            <p class="section-intro">
-                Collect 5 stars before the 20-second timer runs out.
-                Avoid the moving hazard!
+            <p>
+                A selection of my game design coursework and development projects.
             </p>
 
-            <div class="game-panel">
-                <div class="game-stats">
-                    <span>Stars: <strong id="score">0 / 5</strong></span>
-                    <span>Time: <strong id="timer">20s</strong></span>
-                </div>
+            <div class="project-grid">
 
-                <div class="game-arena" id="arena" tabindex="0"
-                     aria-label="Star Collector game area. Use arrow keys or WASD to move.">
-                    <div class="player" id="player" aria-label="Player">◆</div>
-                    <div class="star" id="star" aria-label="Star to collect">★</div>
-                    <div class="hazard" id="hazard" aria-label="Moving hazard">✕</div>
+                <!-- PROJECT 1 -->
+                <article class="project-card">
+                    <img
+                        src="Assets/CPA 3 game win condition.png"
+                        alt="Coin Quest game win condition"
+                        loading="lazy"
+                    >
 
-                    <div class="game-message" id="gameMessage">
-                        <h3 id="messageTitle">Ready to play?</h3>
-                        <p id="messageText">Collect all 5 stars and avoid the red hazard.</p>
-                        <button class="button button-primary" id="startGame" type="button">
-                            Start game
-                        </button>
-                    </div>
-                </div>
+                    <h3>Coin Quest</h3>
 
-                <p class="game-help">
-                    Move with <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>
-                    or the arrow keys. Click the game area first if needed.
-                </p>
+                    <p>
+                        A game project focused on gameplay objectives,
+                        player progression and win conditions.
+                    </p>
+                </article>
+
+
+                <!-- PROJECT 2 -->
+                <article class="project-card">
+                    <img
+                        src="Assets/MEP 1 LEVEL 1 gameplay.png"
+                        alt="Maze Escape level one gameplay"
+                        loading="lazy"
+                    >
+
+                    <h3>Maze Escape — Level 1</h3>
+
+                    <p>
+                        A maze level designed around navigation,
+                        exploration and reaching the objective.
+                    </p>
+                </article>
+
+
+                <!-- PROJECT 3 -->
+                <article class="project-card">
+                    <img
+                        src="Assets/MEP 1 LEVEL 2 gameplay.png"
+                        alt="Maze Escape level two gameplay"
+                        loading="lazy"
+                    >
+
+                    <h3>Maze Escape — Level 2</h3>
+
+                    <p>
+                        A second level that develops the maze concept
+                        through additional gameplay challenges.
+                    </p>
+                </article>
+
+
+                <!-- PROJECT 4 -->
+                <article class="project-card">
+                    <img
+                        src="Assets/MEP 2 game over screen.png"
+                        alt="Game over screen from a game project"
+                        loading="lazy"
+                    >
+
+                    <h3>Game Over Screen</h3>
+
+                    <p>
+                        A game interface showing the player's game-over
+                        state and providing feedback.
+                    </p>
+                </article>
+
+
+                <!-- PROJECT 5 -->
+                <article class="project-card">
+                    <img
+                        src="Assets/MEP 2 website game.png"
+                        alt="Browser-based game project"
+                        loading="lazy"
+                    >
+
+                    <h3>Website Mini-game</h3>
+
+                    <p>
+                        An interactive browser game combining web design
+                        with JavaScript gameplay.
+                    </p>
+                </article>
+
+
+                <!-- PROJECT 6 -->
+                <article class="project-card">
+                    <img
+                        src="Assets/MEP 3 start menu.png"
+                        alt="Start menu from the kitchen collection game"
+                        loading="lazy"
+                    >
+
+                    <h3>Kitchen Collection Game</h3>
+
+                    <p>
+                        A food collection game project featuring a start
+                        menu and a gameplay objective.
+                    </p>
+                </article>
+
+
+                <!-- PROJECT 7 -->
+                <article class="project-card">
+                    <img
+                        src="Assets/MEP 3 kitchen scene.png"
+                        alt="Kitchen scene from the food collection game"
+                        loading="lazy"
+                    >
+
+                    <h3>Kitchen Environment</h3>
+
+                    <p>
+                        A kitchen environment designed with props,
+                        furniture and interactive food items.
+                    </p>
+                </article>
+
             </div>
         </section>
 
-        <!-- CONTACT -->
-        <section class="section section-panel" id="contact">
-            <div class="container contact-content">
-                <p class="eyebrow">LET'S CONNECT</p>
-                <h2>Have a project in mind?</h2>
-                <p>For questions or opportunities, you can reach me by email.</p>
-                <a class="button button-primary"
-                   href="mailto:Bellelectra7@gmail.com">
-                    Bellelectra7@gmail.com
-                </a>
+
+        <!-- MINI-GAME SECTION -->
+        <section id="mini-game">
+            <h2>Star Collector</h2>
+
+            <p>
+                Collect five stars before the timer reaches zero.
+                Avoid the moving purple hazard. Use WASD or the arrow keys
+                to move around the game area.
+            </p>
+
+            <!-- Game score and timer -->
+            <div class="game-info">
+                <p>Stars: <span id="score">0</span> / 5</p>
+                <p>Time: <span id="timer">20</span>s</p>
+            </div>
+
+            <p id="gameStatus" role="status" aria-live="polite">
+                Press Start Game when you're ready!
+            </p>
+
+            <!-- Everything inside this box belongs to the game -->
+            <div id="arena">
+
+                <div id="player" aria-label="Player"></div>
+
+                <div id="star" aria-label="Collectible star"></div>
+
+                <div id="hazard" aria-label="Moving hazard"></div>
+
+                <!-- Start, win and game-over overlay -->
+                <div id="gameMessage">
+                    <h3 id="messageTitle">Star Collector</h3>
+
+                    <p id="messageText">
+                        Collect five stars in 20 seconds and avoid the hazard.
+                    </p>
+
+                    <button type="button" id="startGame">
+                        Start Game
+                    </button>
+                </div>
+
             </div>
         </section>
 
-        <!-- CREDITS -->
-        <section class="section container" id="credits">
-            <p class="eyebrow">SOURCES & ACKNOWLEDGEMENTS</p>
-            <h2>Credits.</h2>
 
-            <div class="credits-panel">
-                <p>
+        <!-- CREDITS SECTION -->
+        <section id="credits">
+            <h2>Credits &amp; Acknowledgements</h2>
+
+            <p>
+                This portfolio includes my coursework screenshots and a
+                browser mini-game created for learning and demonstration.
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Font:</strong>
+                    <a href="https://fonts.google.com/specimen/Inter"
+                       target="_blank"
+                       rel="noopener noreferrer">Inter by Google Fonts</a>.
+                </li>
+
+                <li>
                     <strong>Background image:</strong>
                     <a href="https://unsplash.com/photos/glowing-rounded-tiles-with-green-edges-QZBEjia2uQI"
-                       target="_blank" rel="noopener noreferrer">
-                        Glowing rounded tiles with green edges — Unsplash
-                    </a>.
-                    Used as the website background. Attribution is appreciated
-                    under the Unsplash licence.
-                </p>
+                       target="_blank"
+                       rel="noopener noreferrer">Glowing rounded tiles with green edges</a>
+                    by Veli Batuhan Aytaç, via Unsplash.
+                </li>
 
-                <p>
-                    <strong>Typeface:</strong>
-                    <a href="https://fonts.google.com/specimen/Inter"
-                       target="_blank" rel="noopener noreferrer">
-                        Inter — Google Fonts
-                    </a>.
-                </p>
-
-                <p>
-                    <strong>Website code:</strong>
-                    HTML, CSS and JavaScript are used to create the page
-                    and mini-game. Add any additional sources or assistance
-                    in line with your course's academic-integrity rules.
-                </p>
-
-                <p>
-                    <strong>Project screenshots:</strong>
-                    These paths refer to your own coursework screenshots.
-                    Confirm that each image is your work before publishing.
-                </p>
-            </div>
+                <li>
+                    Project screenshots represent coursework and projects.
+                </li>
+            </ul>
         </section>
+
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <h2>Contact</h2>
+
+            <p>
+                Thank you for taking the time to explore my portfolio.
+            </p>
+
+            <p>
+                Email:
+                <a href="mailto:Bellelectra7@gmail.com">
+                    Bellelectra7@gmail.com
+                </a>
+            </p>
+        </section>
+
     </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>© <span id="year"></span> Electra Bell · Game Design Portfolio</p>
-            <a href="#home">Back to top ↑</a>
-        </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            &copy; <span id="currentYear"></span> Electra Bell.
+            Game Design Portfolio.
+        </p>
     </footer>
+
 </body>
 </html>
