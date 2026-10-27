@@ -1,267 +1,383 @@
-/* ==================================================
-   STAR COLLECTOR
-   This script controls the mini-game in index.html.
-   ================================================== */
+/* ==========================================
+   ELECTRA BELL PORTFOLIO — STAR COLLECTOR
+   Matches the HTML IDs and purple-theme CSS
+   ========================================== */
 
-// Find the HTML elements that the game needs to control.
+
+/* 1. FIND THE HTML ELEMENTS */
+
 const arena = document.getElementById("arena");
 const player = document.getElementById("player");
 const star = document.getElementById("star");
 const hazard = document.getElementById("hazard");
 
-const scoreText = document.getElementById("score");
-const timerText = document.getElementById("timer");
+const scoreDisplay = document.getElementById("score");
+const timerDisplay = document.getElementById("timer");
+const statusDisplay = document.getElementById("gameStatus");
 
-const messageBox = document.getElementById("gameMessage");
+const gameMessage = document.getElementById("gameMessage");
 const messageTitle = document.getElementById("messageTitle");
 const messageText = document.getElementById("messageText");
 const startButton = document.getElementById("startGame");
 
-const yearText = document.getElementById("year");
+const yearDisplay = document.getElementById("currentYear");
 
-// Display the current year automatically in the footer.
-yearText.textContent = new Date().getFullYear();
 
-// These variables remember the game's current state.
-const targetScore = 5;
+/* 2. SHOW THE CURRENT YEAR IN THE FOOTER */
+
+if (yearDisplay) {
+    yearDisplay.textContent = new Date().getFullYear();
+}
+
+
+/* 3. GAME SETTINGS */
+
+const starsNeeded = 5;
 const startingTime = 20;
-const playerStep = 12;
 
 let score = 0;
 let timeLeft = startingTime;
-let playerX = 12;
-let playerY = 12;
-let hazardX = 50;
-let hazardY = 75;
 
+let gameRunning = false;
 let timerInterval = null;
 let hazardInterval = null;
-let gameRunning = false;
 
-// Place a game object using percentages of the arena's size.
-// This helps the objects stay inside the game on different screens.
-function placeObject(element, x, y) {
-    element.style.left = `${x}%`;
-    element.style.top = `${y}%`;
+
+/* 4. PLAYER POSITION AND MOVEMENT SETTINGS */
+
+/*
+   Positions are percentages of the game arena.
+   This means the player can move around even if
+   the game arena changes size on smaller screens.
+*/
+
+let playerX = 10;
+let playerY = 50;
+
+const playerStep = 2.5;
+
+
+/* 5. HAZARD MOVEMENT SETTINGS */
+
+let hazardX = 50;
+let hazardY = 60;
+
+let hazardDirection = 1;
+
+const hazardSpeed = 1.2;
+
+
+/* 6. KEEP THE PLAYER INSIDE THE ARENA */
+
+function keepPlayerInsideArena() {
+    playerX = Math.max(3, Math.min(97, playerX));
+    playerY = Math.max(6, Math.min(94, playerY));
+
+    player.style.left = playerX + "%";
+    player.style.top = playerY + "%";
 }
 
-// Move the star to a random position.
-// The edges are avoided so the star stays easy to reach.
-function moveStar() {
-    const randomX = 8 + Math.random() * 80;
-    const randomY = 8 + Math.random() * 76;
 
-    placeObject(star, randomX, randomY);
-}
+/* 7. MOVE THE HAZARD */
 
-// Move the player in response to a key press.
-function movePlayer(key) {
-    if (!gameRunning) return;
-
-    const arenaWidth = arena.clientWidth;
-    const arenaHeight = arena.clientHeight;
-
-    // Convert the player's percentage position into pixels.
-    let x = (playerX / 100) * arenaWidth;
-    let y = (playerY / 100) * arenaHeight;
-
-    // Work out which direction the player wants to move.
-    switch (key.toLowerCase()) {
-        case "arrowup":
-        case "w":
-            y -= playerStep;
-            break;
-
-        case "arrowdown":
-        case "s":
-            y += playerStep;
-            break;
-
-        case "arrowleft":
-        case "a":
-            x -= playerStep;
-            break;
-
-        case "arrowright":
-        case "d":
-            x += playerStep;
-            break;
-
-        default:
-            return;
+function moveHazard() {
+    if (!gameRunning) {
+        return;
     }
 
-    // Keep the player inside the arena boundaries.
-    x = Math.max(16, Math.min(arenaWidth - 16, x));
-    y = Math.max(16, Math.min(arenaHeight - 16, y));
+    /*
+       The hazard moves left and right.
+       When it reaches an edge, it changes direction.
+    */
 
-    // Convert the updated pixel position back into percentages.
-    playerX = (x / arenaWidth) * 100;
-    playerY = (y / arenaHeight) * 100;
+    hazardX += hazardSpeed * hazardDirection;
 
-    placeObject(player, playerX, playerY);
+    if (hazardX >= 94) {
+        hazardX = 94;
+        hazardDirection = -1;
+    }
 
-    // Check whether the player touched a game object.
-    checkCollisions();
+    if (hazardX <= 6) {
+        hazardX = 6;
+        hazardDirection = 1;
+    }
+
+    hazard.style.left = hazardX + "%";
+    hazard.style.top = hazardY + "%";
+
+    checkHazardCollision();
 }
 
-// Check the distance between two objects.
-// A small distance means the player has touched the object.
-function touching(x1, y1, x2, y2) {
-    const arenaWidth = arena.clientWidth;
-    const arenaHeight = arena.clientHeight;
 
-    const pixelX1 = (x1 / 100) * arenaWidth;
-    const pixelY1 = (y1 / 100) * arenaHeight;
-    const pixelX2 = (x2 / 100) * arenaWidth;
-    const pixelY2 = (y2 / 100) * arenaHeight;
+/* 8. PLACE THE STAR IN A RANDOM POSITION */
 
-    const distance = Math.hypot(
-        pixelX1 - pixelX2,
-        pixelY1 - pixelY2
+function moveStar() {
+    /*
+       Keep the star away from the very edges so it
+       remains visible and easier to collect.
+    */
+
+    const randomX = 10 + Math.random() * 80;
+    const randomY = 12 + Math.random() * 76;
+
+    star.style.left = randomX + "%";
+    star.style.top = randomY + "%";
+}
+
+
+/* 9. CHECK WHETHER TWO GAME OBJECTS TOUCH */
+
+function objectsTouch(firstObject, secondObject) {
+    const first = firstObject.getBoundingClientRect();
+    const second = secondObject.getBoundingClientRect();
+
+    return (
+        first.left < second.right &&
+        first.right > second.left &&
+        first.top < second.bottom &&
+        first.bottom > second.top
     );
-
-    return distance < 28;
 }
 
-// Check if the player collects the star or hits the hazard.
-function checkCollisions() {
-    if (!gameRunning) return;
 
-    // Collecting a star increases the score.
-    const starX = parseFloat(star.style.left);
-    const starY = parseFloat(star.style.top);
+/* 10. CHECK IF THE PLAYER COLLECTS THE STAR */
 
-    if (touching(playerX, playerY, starX, starY)) {
+function checkStarCollection() {
+    if (!gameRunning) {
+        return;
+    }
+
+    if (objectsTouch(player, star)) {
         score++;
-        scoreText.textContent = `${score} / ${targetScore}`;
 
-        if (score >= targetScore) {
+        scoreDisplay.textContent = score;
+
+        statusDisplay.textContent =
+            "Star collected! Keep going!";
+
+        if (score >= starsNeeded) {
             endGame(true);
             return;
         }
 
         moveStar();
     }
+}
 
-    // Touching the hazard ends the round.
-    if (touching(playerX, playerY, hazardX, hazardY)) {
-        endGame(false, "You hit the hazard!");
+
+/* 11. CHECK IF THE PLAYER TOUCHES THE HAZARD */
+
+function checkHazardCollision() {
+    if (!gameRunning) {
+        return;
+    }
+
+    if (objectsTouch(player, hazard)) {
+        /*
+           Touching the hazard sends the player back
+           to the starting position. The timer continues.
+        */
+
+        playerX = 10;
+        playerY = 50;
+
+        keepPlayerInsideArena();
+
+        statusDisplay.textContent =
+            "Watch out! The hazard sent you back to the start.";
+
+        /*
+           Briefly flash the player so the collision
+           is visible without ending the whole game.
+        */
+
+        player.style.opacity = "0.35";
+
+        setTimeout(function () {
+            player.style.opacity = "1";
+        }, 180);
     }
 }
 
-// Move the hazard between two positions.
-// The player must avoid it while collecting stars.
-function moveHazard() {
-    if (!gameRunning) return;
 
-    hazardX = hazardX >= 78 ? 18 : hazardX + 10;
+/* 12. UPDATE THE SCORE AND TIMER */
 
-    // The hazard also shifts between two rows.
-    hazardY = hazardY === 75 ? 25 : 75;
+function updateTimer() {
+    if (!gameRunning) {
+        return;
+    }
 
-    placeObject(hazard, hazardX, hazardY);
+    timeLeft--;
 
-    checkCollisions();
+    timerDisplay.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+        timeLeft = 0;
+        timerDisplay.textContent = timeLeft;
+
+        endGame(false);
+    }
 }
 
-// Stop both repeating timers.
-// This prevents multiple timers from running after a restart.
-function stopTimers() {
+
+/* 13. START THE GAME */
+
+function startGame() {
+    /*
+       Clear old timers first so restarting the game
+       never creates multiple timers running together.
+    */
+
     clearInterval(timerInterval);
     clearInterval(hazardInterval);
-
-    timerInterval = null;
-    hazardInterval = null;
-}
-
-// Finish the game and display the result.
-function endGame(won, customMessage = "") {
-    gameRunning = false;
-    stopTimers();
-
-    messageBox.classList.remove("is-hidden");
-
-    if (won) {
-        messageTitle.textContent = "You won!";
-        messageText.textContent = "Amazing! You collected all 5 stars.";
-    } else {
-        messageTitle.textContent = "Game over!";
-        messageText.textContent =
-            customMessage || "Time ran out. Give it another try!";
-    }
-
-    startButton.textContent = "Play again";
-}
-
-// Start a new round or restart after a result.
-function startGame() {
-    stopTimers();
 
     score = 0;
     timeLeft = startingTime;
 
-    playerX = 12;
-    playerY = 12;
+    playerX = 10;
+    playerY = 50;
 
     hazardX = 50;
-    hazardY = 75;
+    hazardY = 60;
+    hazardDirection = 1;
 
-    scoreText.textContent = `${score} / ${targetScore}`;
-    timerText.textContent = `${timeLeft}s`;
+    scoreDisplay.textContent = score;
+    timerDisplay.textContent = timeLeft;
 
-    placeObject(player, playerX, playerY);
-    placeObject(hazard, hazardX, hazardY);
+    player.style.left = playerX + "%";
+    player.style.top = playerY + "%";
+
+    hazard.style.left = hazardX + "%";
+    hazard.style.top = hazardY + "%";
+
+    player.style.opacity = "1";
 
     moveStar();
 
-    // Hide the welcome message so the player can play.
-    messageBox.classList.add("is-hidden");
-
     gameRunning = true;
 
-    // Count down once per second.
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        timerText.textContent = `${timeLeft}s`;
+    gameMessage.style.display = "none";
 
-        if (timeLeft <= 0) {
-            endGame(false);
-        }
-    }, 1000);
+    statusDisplay.textContent =
+        "Collect five stars and avoid the moving hazard!";
 
-    // Move the hazard every 700 milliseconds.
-    hazardInterval = setInterval(moveHazard, 700);
+    /*
+       The timer counts down once per second.
+       The hazard moves more frequently to look animated.
+    */
 
-    // Focus the game area so the player can use the keyboard.
-    arena.focus();
+    timerInterval = setInterval(updateTimer, 1000);
+    hazardInterval = setInterval(moveHazard, 35);
 }
 
-// Listen for movement keys on the keyboard.
-document.addEventListener("keydown", (event) => {
-    const movementKeys = [
-        "arrowup",
-        "arrowdown",
-        "arrowleft",
-        "arrowright",
-        "w",
-        "a",
-        "s",
-        "d"
-    ];
 
-    if (movementKeys.includes(event.key.toLowerCase())) {
-        if (gameRunning) {
-            event.preventDefault();
-            movePlayer(event.key);
-        }
+/* 14. END THE GAME */
+
+function endGame(won) {
+    gameRunning = false;
+
+    clearInterval(timerInterval);
+    clearInterval(hazardInterval);
+
+    gameMessage.style.display = "flex";
+
+    if (won) {
+        messageTitle.textContent = "You Win!";
+        messageText.textContent =
+            "Amazing! You collected all five stars in time.";
+
+        statusDisplay.textContent =
+            "Victory! You collected all five stars.";
+    } else {
+        messageTitle.textContent = "Game Over!";
+
+        messageText.textContent =
+            "Time ran out! You collected " + score +
+            " out of " + starsNeeded +
+            " stars. Try again!";
+
+        statusDisplay.textContent =
+            "Time is up. Press Play Again to retry.";
     }
+
+    startButton.textContent = "Play Again";
+}
+
+
+/* 15. MOVE THE PLAYER WITH THE KEYBOARD */
+
+document.addEventListener("keydown", function (event) {
+    if (!gameRunning) {
+        return;
+    }
+
+    const key = event.key.toLowerCase();
+
+    /*
+       Prevent the arrow keys from scrolling the page
+       while the player is controlling the game.
+    */
+
+    if (
+        key === "arrowup" ||
+        key === "arrowdown" ||
+        key === "arrowleft" ||
+        key === "arrowright" ||
+        key === " "
+    ) {
+        event.preventDefault();
+    }
+
+    if (key === "w" || key === "arrowup") {
+        playerY -= playerStep;
+    }
+
+    if (key === "s" || key === "arrowdown") {
+        playerY += playerStep;
+    }
+
+    if (key === "a" || key === "arrowleft") {
+        playerX -= playerStep;
+    }
+
+    if (key === "d" || key === "arrowright") {
+        playerX += playerStep;
+    }
+
+    keepPlayerInsideArena();
+
+    checkStarCollection();
+    checkHazardCollision();
 });
 
-// Start the game when the button is clicked.
-startButton.addEventListener("click", startGame);
 
-// Set up the initial positions before the first round.
-placeObject(player, playerX, playerY);
-placeObject(star, 70, 45);
-placeObject(hazard, hazardX, hazardY);
+/* 16. CONNECT THE START BUTTON */
+
+startButton.addEventListener("click", function () {
+    startGame();
+});
+
+
+/* 17. SET UP THE GAME BEFORE IT STARTS */
+
+function prepareGame() {
+    scoreDisplay.textContent = "0";
+    timerDisplay.textContent = startingTime;
+
+    playerX = 10;
+    playerY = 50;
+
+    hazardX = 50;
+    hazardY = 60;
+
+    keepPlayerInsideArena();
+
+    hazard.style.left = hazardX + "%";
+    hazard.style.top = hazardY + "%";
+
+    moveStar();
+
+    gameMessage.style.display = "flex";
+}
+
+prepareGame();
