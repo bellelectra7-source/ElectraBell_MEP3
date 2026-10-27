@@ -1,706 +1,785 @@
-/* ========================================
-   ELECTRA BELL — GAME DESIGN PORTFOLIO
-   Theme: Dark Purple, Plum and Lilac
-   ======================================== */
-
-
-/* 1. COLOUR PALETTE */
+/* =========================================================
+   ELECTRA BELL PORTFOLIO
+   My main colour palette and reusable design settings.
+   Keeping colours here makes it easier to update the theme.
+   ========================================================= */
 
 :root {
-    --background: #0b0612;
-    --panel: #170d22;
-    --panel-light: #241331;
-
-    --purple: #a855f7;
-    --purple-bright: #d8b4fe;
-    --purple-soft: #c084fc;
-    --purple-dark: #3b1857;
-
-    --text: #faf5ff;
-    --muted: #d0c1dc;
-
-    --border: rgba(192, 132, 252, 0.25);
+    --page-bg: #0c0e14;
+    --surface: #141822;
+    --surface-light: #1b2030;
+    --text-main: #f5f5fb;
+    --text-muted: #a7adbd;
+    --accent-purple: #a78bfa;
+    --accent-blue: #7dd3fc;
+    --accent-pink: #f9a8d4;
+    --border-colour: rgba(255, 255, 255, 0.1);
 }
-
-
-/* 2. GENERAL PAGE SETTINGS */
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-padding-top: 85px;
 }
 
 body {
-    min-height: 100vh;
-    background-color: var(--background);
-    color: var(--text);
-
-    font-family: "Inter", sans-serif;
-    line-height: 1.7;
-
-    overflow-wrap: break-word;
-
-    /* Background image with a strong purple overlay.
-       Save the image as assets/background.jpg. */
-    background-image:
-        linear-gradient(
-            rgba(25, 5, 43, 0.88),
-            rgba(11, 6, 18, 0.96)
-        ),
-        url("assets/background.jpg");
-
-    background-position: center top;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--text-main);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
 }
 
-
-/* 3. BASIC ELEMENTS */
-
-a {
-    color: var(--purple-bright);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: #ead5ff;
-}
-
-img {
-    display: block;
-    max-width: 100%;
-}
-
-button {
-    font: inherit;
+section,
+header {
+    scroll-margin-top: 80px;
 }
 
 p {
-    color: var(--muted);
-    margin-bottom: 16px;
+    color: var(--text-muted);
 }
 
-h1,
-h2,
-h3,
-h4 {
-    color: var(--text);
-    line-height: 1.25;
-}
-
-h2 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    margin-bottom: 20px;
-}
-
-h3 {
-    margin-bottom: 12px;
-}
-
-::selection {
-    background: var(--purple);
-    color: #ffffff;
+a {
+    text-decoration: none;
 }
 
 
-/* 4. PAGE WIDTH */
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
-header,
-main,
-footer {
-    width: 100%;
+.portfolio-nav {
+    background: rgba(12, 14, 20, 0.94);
+    border-bottom: 1px solid var(--border-colour);
+    backdrop-filter: blur(12px);
 }
 
-section {
-    padding: 80px 8%;
-    scroll-margin-top: 70px;
+.navbar-brand {
+    color: var(--text-main);
+    letter-spacing: -0.5px;
 }
 
-section > h2 {
-    position: relative;
-    display: inline-block;
+.navbar-brand:hover {
+    color: var(--text-main);
 }
 
-section > h2::after {
-    content: "";
-    display: block;
+.brand-dot {
+    color: var(--accent-purple);
+}
 
-    width: 65px;
-    height: 4px;
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--text-muted);
+    padding: 10px 13px;
+    transition: color 0.2s ease;
+}
 
-    margin-top: 12px;
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+    color: var(--accent-blue);
+}
 
-    background: var(--purple);
+.navbar-toggler {
+    border-color: var(--border-colour);
+}
+
+
+/* =========================================================
+   REUSABLE BUTTONS AND TEXT
+   ========================================================= */
+
+.btn-accent {
+    background: linear-gradient(120deg, var(--accent-purple), var(--accent-blue));
+    color: #10111a;
+    border: none;
     border-radius: 10px;
+    padding: 12px 20px;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-
-/* 5. NAVIGATION BAR */
-
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-
-    padding: 18px 8%;
-
-    background: rgba(13, 7, 20, 0.94);
-    border-bottom: 1px solid var(--border);
-
-    backdrop-filter: blur(14px);
+.btn-accent:hover {
+    color: #10111a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(167, 139, 250, 0.2);
 }
 
-nav a {
-    color: var(--muted);
-    font-size: 0.95rem;
-    font-weight: 600;
+.btn-outline-light {
+    border-radius: 10px;
+    padding: 12px 20px;
 }
 
-nav a:hover {
-    color: var(--purple-bright);
-}
-
-nav a:focus-visible,
-button:focus-visible,
-a:focus-visible {
-    outline: 2px solid var(--purple-bright);
-    outline-offset: 4px;
-}
-
-nav ul {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: 22px;
-
-    list-style: none;
-}
-
-nav ul a {
-    display: inline-block;
-}
-
-
-/* 6. HERO / INTRODUCTION SECTION */
-
-.hero {
-    min-height: 78vh;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-
-    padding-top: 100px;
-    padding-bottom: 100px;
-}
-
-.hero h1 {
-    max-width: 900px;
-
-    margin-bottom: 20px;
-
-    font-size: clamp(2.7rem, 7vw, 5.5rem);
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1.08;
-}
-
-.hero h1 span {
-    color: var(--purple-bright);
-}
-
-.hero p {
-    max-width: 680px;
-    font-size: 1.1rem;
-}
-
-.hero .subtitle {
-    color: var(--purple-soft);
+.eyebrow {
+    color: var(--accent-blue);
+    font-size: 0.76rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 18px;
+}
+
+.gradient-text {
+    background: linear-gradient(100deg, var(--accent-purple), var(--accent-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 
-/* 7. BUTTONS */
+/* =========================================================
+   HOME / HERO SECTION
+   ========================================================= */
 
-.btn,
-button,
-.button {
-    display: inline-flex;
+.hero-section {
+    min-height: 100vh;
+    padding: 145px 0 85px;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
+    overflow: hidden;
+}
 
-    padding: 12px 24px;
+.hero-section h1 {
+    max-width: 760px;
+    margin: 18px 0;
+    font-size: clamp(2.7rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -3px;
+    line-height: 1.08;
+}
 
-    background: var(--purple);
-    color: #ffffff;
+.hero-description {
+    max-width: 600px;
+    margin-bottom: 28px;
+    font-size: 1.08rem;
+}
 
-    border: 1px solid var(--purple);
-    border-radius: 10px;
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 45px;
+}
 
+.hero-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.hero-stats strong {
+    color: var(--text-main);
+    font-size: 1.35rem;
+}
+
+.hero-stats span {
+    color: var(--text-muted);
+    font-size: 0.83rem;
+}
+
+
+/* CSS artwork for the hero section. */
+.hero-art {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    max-width: 430px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    border: 1px solid var(--border-colour);
+    border-radius: 35px;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.16), transparent 55%),
+        linear-gradient(140deg, #191d2b, #0e1119);
+}
+
+.orbit {
+    position: absolute;
+    width: 68%;
+    height: 68%;
+    border: 1px solid rgba(167, 139, 250, 0.45);
+    border-radius: 50%;
+}
+
+.orbit-one {
+    transform: rotate(35deg) scaleX(0.7);
+}
+
+.orbit-two {
+    transform: rotate(-35deg) scaleX(0.7);
+    border-color: rgba(125, 211, 252, 0.45);
+}
+
+.hero-core {
+    display: grid;
+    place-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+    box-shadow: 0 0 60px rgba(167, 139, 250, 0.2);
+    transform: rotate(-8deg);
+}
+
+.hero-core span {
+    color: #10111a;
+    font-size: 2.5rem;
+    font-weight: 800;
+    transform: rotate(8deg);
+}
+
+.floating-symbol {
+    position: absolute;
+    color: var(--accent-blue);
+    font-size: 2rem;
+}
+
+.symbol-one {
+    top: 17%;
+    left: 18%;
+}
+
+.symbol-two {
+    right: 17%;
+    top: 35%;
+    color: var(--accent-pink);
+}
+
+.symbol-three {
+    bottom: 17%;
+    left: 25%;
+    color: var(--accent-purple);
+}
+
+
+/* =========================================================
+   SECTION SPACING AND HEADINGS
+   ========================================================= */
+
+.section-padding {
+    padding: 100px 0;
+}
+
+.section-muted {
+    background: #10131c;
+}
+
+.section-heading {
+    max-width: 720px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.section-heading h2,
+#contact h2 {
+    margin: 12px 0 18px;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.section-heading > p:last-child {
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   ABOUT CARDS AND SKILLS
+   ========================================================= */
+
+.info-card {
+    padding: 28px;
+    border: 1px solid var(--border-colour);
+    border-radius: 18px;
+    background: var(--surface);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(167, 139, 250, 0.5);
+}
+
+.card-number {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--accent-purple);
+    font-size: 0.85rem;
     font-weight: 700;
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
-.btn:hover,
-button:hover,
-.button:hover {
-    background: #9333ea;
-    border-color: #c084fc;
-    color: #ffffff;
-
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25);
+.info-card h3 {
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
-.btn:active,
-button:active,
-.button:active {
-    transform: translateY(0);
+.info-card p {
+    margin-bottom: 0;
 }
 
-
-/* 8. ABOUT SECTION */
-
-#about {
-    background: rgba(17, 9, 27, 0.78);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+.skills-area {
+    margin-top: 50px;
 }
 
-#about p {
-    max-width: 850px;
+.skills-area h3 {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
-.skills,
 .skill-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-
-    margin-top: 24px;
+    gap: 10px;
 }
 
-.skills span,
 .skill-list span {
-    display: inline-block;
-
-    padding: 8px 15px;
-
-    background: rgba(168, 85, 247, 0.12);
-    color: var(--purple-bright);
-
-    border: 1px solid var(--border);
-    border-radius: 30px;
-
-    font-size: 0.9rem;
-    font-weight: 600;
+    padding: 8px 13px;
+    border: 1px solid var(--border-colour);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 0.88rem;
 }
 
 
-/* 9. PROJECTS SECTION */
+/* =========================================================
+   PROJECT SHOWCASE AND FILTER BUTTONS
+   ========================================================= */
 
-#projects {
-    background: rgba(11, 6, 18, 0.55);
+.project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 35px;
 }
 
-.project-grid,
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
+.filter-btn {
+    padding: 9px 16px;
+    border: 1px solid var(--border-colour);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
 
-    margin-top: 30px;
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--accent-purple);
+    color: #11111a;
+    border-color: var(--accent-purple);
 }
 
 .project-card {
-    min-width: 0;
     overflow: hidden;
-
-    background: rgba(23, 13, 34, 0.94);
-
-    border: 1px solid var(--border);
-    border-radius: 16px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+    border: 1px solid var(--border-colour);
+    border-radius: 18px;
+    background: var(--surface);
+    transition: transform 0.2s ease;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-
-    border-color: var(--purple);
-    box-shadow: 0 15px 35px rgba(88, 28, 135, 0.2);
 }
 
-.project-card img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-
-    background: var(--panel-light);
-    border-bottom: 1px solid var(--border);
+.project-visual {
+    display: grid;
+    place-items: center;
+    position: relative;
+    min-height: 210px;
+    overflow: hidden;
 }
 
-.project-card h3 {
-    padding: 20px 20px 0;
-    font-size: 1.2rem;
+.visual-purple {
+    background: radial-gradient(circle at 50% 45%, #6650a8, #29203e 70%);
 }
 
-.project-card p {
-    padding: 0 20px;
-    font-size: 0.95rem;
+.visual-blue {
+    background: radial-gradient(circle at 50% 45%, #287a9b, #172b45 70%);
 }
 
-.project-card a {
-    display: inline-block;
-    margin: 0 20px 20px;
+.visual-pink {
+    background: radial-gradient(circle at 50% 45%, #9d4f88, #3d213b 70%);
+}
 
-    color: var(--purple-bright);
+.visual-symbol {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 5rem;
+}
+
+.visual-label {
+    position: absolute;
+    right: 16px;
+    bottom: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.project-content {
+    padding: 24px;
+}
+
+.project-category {
+    color: var(--accent-blue);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.project-content h3 {
+    font-size: 1.25rem;
     font-weight: 700;
 }
 
-.project-card a:hover {
-    color: #ead5ff;
+.project-content p:not(.project-category) {
+    font-size: 0.94rem;
+}
+
+.text-link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent-purple);
+    font-weight: 700;
+    text-align: left;
+}
+
+.text-link:hover {
+    color: var(--accent-blue);
+}
+
+.project-hidden {
+    display: none !important;
 }
 
 
-/* 10. MINI-GAME SECTION */
+/* =========================================================
+   STAR COLLECTOR MINI-GAME
+   These styles are only for the playable browser game.
+   ========================================================= */
 
-#mini-game {
-    background: rgba(24, 10, 38, 0.78);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+.mini-game-card {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 22px;
+    border: 1px solid var(--border-colour);
+    border-radius: 22px;
+    background: var(--surface);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 
-#mini-game > p {
-    max-width: 750px;
-}
-
-
-/* Game information: score and timer */
-
-.game-info {
+/* Score, timer and status appear above the game area. */
+.game-topbar {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 16px;
-
-    margin: 24px 0;
+    margin-bottom: 18px;
 }
 
-.game-info p,
-.game-info span {
-    color: var(--purple-bright);
-    font-weight: 700;
-}
-
-
-/* Game arena */
-
-#arena {
-    position: relative;
-
-    width: 100%;
-    max-width: 800px;
-    height: 420px;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(88, 28, 135, 0.25),
-            transparent 70%
-        ),
-        #10091a;
-
-    border: 2px solid var(--purple-dark);
-    border-radius: 16px;
-
-    box-shadow:
-        inset 0 0 35px rgba(168, 85, 247, 0.08),
-        0 12px 35px rgba(0, 0, 0, 0.2);
-}
-
-
-/* Player inside the game */
-
-#player {
-    position: absolute;
-
-    width: 34px;
-    height: 34px;
-
-    left: 10%;
-    top: 50%;
-
-    background: var(--purple-bright);
-    border: 3px solid #ffffff;
-    border-radius: 50%;
-
-    box-shadow: 0 0 20px rgba(192, 132, 252, 0.8);
-
-    transform: translate(-50%, -50%);
-}
-
-
-/* Collectible star */
-
-#star {
-    position: absolute;
-
-    width: 27px;
-    height: 27px;
-
-    left: 70%;
-    top: 35%;
-
-    background: #e9c5ff;
-    border: 2px solid #ffffff;
-    border-radius: 8px;
-
-    box-shadow: 0 0 20px rgba(216, 180, 254, 0.9);
-
-    transform: rotate(45deg);
-}
-
-
-/* Moving hazard */
-
-#hazard {
-    position: absolute;
-
-    width: 38px;
-    height: 38px;
-
-    left: 50%;
-    top: 60%;
-
-    background: #701a75;
-    border: 2px solid #e879f9;
-    border-radius: 10px;
-
-    box-shadow: 0 0 18px rgba(217, 70, 239, 0.45);
-}
-
-
-/* Game message overlay */
-
-#gameMessage {
-    position: absolute;
-    inset: 0;
-    z-index: 5;
-
+.game-topbar > div {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 3px;
+}
 
-    padding: 24px;
+.game-stat-label {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+}
+
+.game-topbar strong {
+    color: var(--text-main);
+    font-size: 1.1rem;
+}
+
+/* The arena is the space where all the game action happens. */
+.game-arena {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    border-radius: 15px;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(43, 48, 76, 0.65), transparent 65%),
+        #0a0d16;
+    outline: none;
+    isolation: isolate;
+}
+
+.game-arena:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 4px;
+}
+
+/* A subtle grid gives the game area a digital look. */
+.game-grid-pattern {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        linear-gradient(rgba(167, 139, 250, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.07) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+}
+
+/* JavaScript changes the left and top positions of the player. */
+.game-player,
+.game-star,
+.game-hazard {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    pointer-events: none;
+}
+
+.game-player {
+    z-index: 3;
+    left: 12%;
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #e4dcff;
+    border-radius: 10px;
+    background: var(--accent-purple);
+    color: #171226;
+    font-size: 1.2rem;
+    box-shadow: 0 0 22px rgba(167, 139, 250, 0.45);
+}
+
+.game-star {
+    z-index: 2;
+    left: 70%;
+    top: 35%;
+    width: 34px;
+    height: 34px;
+    color: #ffe28a;
+    font-size: 2rem;
+    filter: drop-shadow(0 0 9px rgba(255, 226, 138, 0.6));
+    animation: star-glow 1.2s ease-in-out infinite alternate;
+}
+
+.game-hazard {
+    z-index: 2;
+    left: 52%;
+    top: 68%;
+    width: 35px;
+    height: 35px;
+    border: 2px solid #ffb0ba;
+    border-radius: 10px;
+    background: #f05267;
+    color: #2a0710;
+    font-size: 1.3rem;
+    box-shadow: 0 0 20px rgba(240, 82, 103, 0.35);
+}
+
+/* This overlay is used for the start screen and end-of-game message. */
+.game-overlay {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 22px;
+    background: rgba(7, 9, 16, 0.84);
     text-align: center;
-
-    background: rgba(11, 6, 18, 0.94);
-    border-radius: 14px;
 }
 
-#gameMessage h3,
-#messageTitle {
-    margin-bottom: 12px;
-
-    color: var(--purple-bright);
-    font-size: clamp(1.5rem, 4vw, 2rem);
+.game-overlay.is-hidden {
+    display: none;
 }
 
-#gameMessage p,
-#messageText {
-    max-width: 450px;
+.game-overlay-content {
+    max-width: 440px;
+}
+
+.game-overlay h3 {
+    margin: 10px 0;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    font-weight: 800;
+}
+
+.game-overlay p:not(.eyebrow) {
     margin-bottom: 20px;
 }
 
-#startGame {
-    margin-top: 8px;
+.game-instructions {
+    padding-top: 20px;
 }
 
-
-/* 11. CREDITS SECTION */
-
-#credits {
-    background: rgba(11, 6, 18, 0.78);
+.game-instructions p {
+    margin-bottom: 8px;
 }
 
-#credits p,
-#credits li {
-    color: var(--muted);
+.game-instructions strong {
+    color: var(--text-main);
 }
 
-#credits ul {
-    padding-left: 22px;
-    margin-top: 15px;
-}
-
-#credits li {
-    margin-bottom: 10px;
-}
-
-#credits a {
-    color: var(--purple-bright);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-
-/* 12. CONTACT SECTION */
-
-#contact {
-    background: rgba(24, 10, 38, 0.78);
-    border-top: 1px solid var(--border);
-}
-
-#contact a {
-    color: var(--purple-bright);
-    font-weight: 700;
-}
-
-#contact a:hover {
-    color: #ead5ff;
-}
-
-
-/* 13. FOOTER */
-
-footer {
-    padding: 28px 8%;
-
-    background: rgba(8, 4, 13, 0.96);
-    border-top: 1px solid var(--border);
-
+kbd {
+    display: inline-block;
+    min-width: 27px;
+    margin: 0 2px;
+    padding: 4px 7px;
+    border: 1px solid var(--border-colour);
+    border-radius: 5px;
+    background: var(--surface-light);
+    color: var(--text-main);
     text-align: center;
+    font-family: inherit;
+    font-size: 0.8rem;
 }
 
-footer p {
-    margin: 0;
+.game-small-note {
+    font-size: 0.86rem;
+}
+
+
+/* The star gently glows so players can spot it. */
+@keyframes star-glow {
+    from {
+        opacity: 0.75;
+        scale: 0.92;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1.08;
+    }
+}
+
+
+/* =========================================================
+   CONTACT FORM
+   ========================================================= */
+
+.contact-description {
+    max-width: 430px;
+}
+
+.contact-form {
+    padding: 30px;
+    border: 1px solid var(--border-colour);
+    border-radius: 18px;
+    background: var(--surface);
+}
+
+.contact-form .form-label {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.contact-form .form-control {
+    padding: 12px 14px;
+    border: 1px solid var(--border-colour);
+    background: #0e1119;
+    color: var(--text-main);
+}
+
+.contact-form .form-control::placeholder {
+    color: #7f8798;
+}
+
+.contact-form .form-control:focus {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 0.2rem rgba(167, 139, 250, 0.15);
+}
+
+.form-feedback {
+    min-height: 24px;
+    margin-top: 15px;
+    margin-bottom: 0;
     font-size: 0.9rem;
 }
 
 
-/* 14. TABLETS AND SMALLER SCREENS */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
-@media (max-width: 900px) {
-    section {
-        padding: 65px 6%;
-    }
+.portfolio-footer {
+    padding: 25px 0;
+    border-top: 1px solid var(--border-colour);
+    background: var(--page-bg);
+}
 
-    nav {
-        padding: 16px 6%;
-        align-items: flex-start;
-    }
-
-    nav ul {
-        gap: 12px 16px;
-    }
-
-    .project-grid,
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    #arena {
-        height: 380px;
-    }
+.portfolio-footer p {
+    margin: 0;
+    font-size: 0.85rem;
 }
 
 
-/* 15. MOBILE PHONES */
+/* =========================================================
+   RESPONSIVE DESIGN
+   These changes help the site fit smaller screens.
+   ========================================================= */
 
-@media (max-width: 600px) {
-    body {
-        background-attachment: scroll;
+@media (max-width: 767px) {
+    .hero-section {
+        min-height: auto;
+        padding: 125px 0 70px;
     }
 
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
+    .hero-section h1 {
+        letter-spacing: -1.5px;
     }
 
-    nav ul {
-        justify-content: flex-start;
-        gap: 10px 16px;
+    .hero-stats {
+        gap: 20px;
     }
 
-    nav a {
-        font-size: 0.88rem;
+    .hero-art {
+        max-width: 330px;
     }
 
-    section {
-        padding: 50px 6%;
+    .section-padding {
+        padding: 70px 0;
     }
 
-    .hero {
-        min-height: 65vh;
-        padding-top: 65px;
-        padding-bottom: 65px;
+    .game-arena {
+        height: 330px;
     }
 
-    .hero h1 {
-        letter-spacing: -1px;
+    .mini-game-card {
+        padding: 14px;
     }
 
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .project-grid,
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    #arena {
-        height: 320px;
-    }
-
-    .game-info {
-        gap: 8px 16px;
-    }
-
-    .btn,
-    button,
-    .button {
-        max-width: 100%;
+    .contact-form {
+        padding: 22px;
     }
 }
 
+@media (max-width: 420px) {
+    .game-arena {
+        height: 300px;
+    }
 
-/* 16. ACCESSIBILITY: REDUCED ANIMATION */
+    .game-topbar {
+        gap: 12px;
+    }
 
+    .game-stat-label {
+        font-size: 0.62rem;
+    }
+
+    .game-topbar strong {
+        font-size: 0.95rem;
+    }
+}
+
+/* Respect visitors who prefer less animation. */
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -709,8 +788,18 @@ footer p {
     *,
     *::before,
     *::after {
-        transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
+}
+
+/* COURSEWORK SCREENSHOTS
+   Keeps all seven portfolio images aligned inside their project cards. */
+.project-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    background: #171526;
 }
